@@ -116,6 +116,7 @@ Webhook URL is stored as a Worker secret (`TEAMS_WEBHOOK`).
 | `cloudflare-worker/wrangler.toml` | Wrangler config - worker name, KV binding, cron schedule |
 | `cloudflare-worker/package.json` | Node dependencies (wrangler) |
 | `cloudflare-worker/.dev.vars` | Local dev secrets (not deployed, gitignored) |
-| `logo.svg` | Placeholder logo (replace with your own and upload to KV) |
+| `logo.png` / `logo-256.png` | Brand logo (full-res + 256px web-optimised, embedded in worker.js as a fallback) |
+| `screenshots/` | UI screenshots |
 | `README.md` | Public-facing project overview |
 | `CLAUDE.md` | This file - project documentation for Claude Code sessions |

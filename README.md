@@ -4,6 +4,28 @@ A lightweight Cloudflare Worker that lets retail staff toggle a PLU item (a "dai
 
 > **Note:** This is a sanitised portfolio version of an internal tool I built. Brand name ("Sunrise Donuts"), store names, and domain are placeholders; architecture and code are real.
 
+## Screenshots
+
+### Staff-facing flow (POS touchscreen)
+
+<p align="center">
+  <img src="screenshots/store-picker.png" alt="Store picker" width="45%"/>
+  &nbsp;
+  <img src="screenshots/confirm-page.png" alt="Two-step confirmation" width="45%"/>
+</p>
+<p align="center"><em>Left: store picker - one POS button for every location. Right: two-step confirmation prevents accidental activation.</em></p>
+
+### Admin dashboard
+
+<p align="center">
+  <img src="screenshots/admin-login.png" alt="Admin login" width="30%"/>
+  &nbsp;
+  <img src="screenshots/admin-stores.png" alt="Admin - stores" width="30%"/>
+  &nbsp;
+  <img src="screenshots/admin-analytics.png" alt="Admin - analytics" width="30%"/>
+</p>
+<p align="center"><em>Password-gated admin area: session-cookie auth, per-store status + force-reoffline, audit log, and per-store activation analytics.</em></p>
+
 ## Why this exists
 
 A quick-service donut chain ran a limited daily product that:
@@ -103,7 +125,8 @@ No timers, no cleanup job, no Redis. The key just disappears.
 | `cloudflare-worker/src/worker.js` | Everything - routes, UI, API client, cron handler, audit logging, Teams alerts |
 | `cloudflare-worker/wrangler.toml` | Worker config, cron schedule, KV binding |
 | `cloudflare-worker/package.json` | Just `wrangler` as a dev dep |
-| `logo.svg` | Placeholder branding asset (upload your own to KV at key `logo.png`) |
+| `logo.png` / `logo-256.png` | Brand logo (full-res + 256px web-optimised). The 256px version is base64-embedded in `worker.js` as a fallback so the worker renders correctly on fresh clones without KV setup. |
+| `screenshots/` | UI screenshots referenced from this README |
 | `CLAUDE.md` | Deeper engineering notes (API quirks, architecture decisions, gotchas) |
 
 ## Running it yourself
@@ -119,10 +142,10 @@ npx wrangler secret put TEAMS_WEBHOOK              # optional
 npx wrangler deploy
 ```
 
-Then upload your logo:
+Then upload your logo (optional - falls back to the embedded one if skipped):
 
 ```bash
-npx wrangler kv key put --namespace-id=<YOUR_KV_ID> "logo.png" --path="../logo.svg"
+npx wrangler kv key put --namespace-id=<YOUR_KV_ID> "logo.png" --path="../logo-256.png"
 ```
 
 ## What I'd do differently
