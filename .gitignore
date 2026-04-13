@@ -1,0 +1,18 @@
+# Node
+node_modules/
+cloudflare-worker/node_modules/
+
+# Cloudflare local state
+cloudflare-worker/.wrangler/
+
+# Cloudflare local dev secrets (never commit)
+.dev.vars
+cloudflare-worker/.dev.vars
+
+# Audit log exports (may contain IPs)
+audit-log-*.csv
+
+# IDE / tools
+.claude/
+.vscode/
+.idea/
